@@ -1,10 +1,82 @@
+import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, MapPin, Send, Github, Linkedin } from "lucide-react";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { useToast } from "@/hooks/use-toast";
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Loader2 } from "lucide-react";
+import { initEmailJS, sendEmail } from "@/lib/emailjs";
+
+// Form validation schema
+const contactFormSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  subject: z.string().min(5, "Subject must be at least 5 characters"),
+  message: z.string().min(10, "Message must be at least 10 characters"),
+});
+
+type ContactFormData = z.infer<typeof contactFormSchema>;
 
 const Contact = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+
+  // Initialize EmailJS when component mounts
+  useEffect(() => {
+    initEmailJS();
+  }, []);
+
+  const form = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+    },
+  });
+
+  const onSubmit = async (data: ContactFormData) => {
+    setIsSubmitting(true);
+    
+    try {
+      const templateParams = {
+        from_name: data.name,
+        from_email: data.email,
+        subject: data.subject,
+        message: data.message,
+        to_name: "Soumaya", // Your name
+      };
+
+      // Send email using EmailJS
+      const result = await sendEmail(templateParams);
+
+      if (result.status === 200) {
+        toast({
+          title: "Message sent successfully!",
+          description: "Thank you for reaching out. I'll get back to you soon!",
+          variant: "default",
+        });
+        
+        // Reset form
+        form.reset();
+      }
+    } catch (error) {
+      console.error("Email sending failed:", error);
+      toast({
+        title: "Failed to send message",
+        description: "Please try again later or contact me directly via email.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-20 px-6 bg-background/50">
       <div className="container mx-auto">
@@ -31,7 +103,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="font-semibold text-foreground">Email</p>
-                    <p className="text-muted-foreground">contact@example.com</p>
+                    <p className="text-muted-foreground">soumaya@ben-hassen.com</p>
                   </div>
                 </div>
 
@@ -41,7 +113,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="font-semibold text-foreground">Phone</p>
-                    <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                    <p className="text-muted-foreground">+49 15511 037662</p>
                   </div>
                 </div>
 
@@ -51,7 +123,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="font-semibold text-foreground">Location</p>
-                    <p className="text-muted-foreground">Available for Remote Work</p>
+                    <p className="text-muted-foreground">Germany, Available for Remote Work</p>
                   </div>
                 </div>
               </div>
@@ -61,13 +133,13 @@ const Contact = () => {
                 <p className="text-sm font-semibold text-foreground mb-4">Connect on Social</p>
                 <div className="flex gap-4">
                   <a 
-                    href="#" 
+                    href="https://github.com/soumaya-benhassen" 
                     className="glow-primary rounded-full w-10 h-10 flex items-center justify-center bg-primary/10 hover:bg-primary/20 transition-smooth hover-glow"
                   >
                     <Github className="text-primary" size={18} />
                   </a>
                   <a 
-                    href="#" 
+                    href="https://www.linkedin.com/in/soumaya-ben-hassen/" 
                     className="glow-primary rounded-full w-10 h-10 flex items-center justify-center bg-primary/10 hover:bg-primary/20 transition-smooth hover-glow"
                   >
                     <Linkedin className="text-primary" size={18} />
@@ -93,47 +165,104 @@ const Contact = () => {
           <Card className="gradient-card border-border/50 p-8 hover-glow transition-smooth">
             <h3 className="text-2xl font-bold mb-6 text-primary">Send a Message</h3>
             
-            <form className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm font-semibold text-foreground mb-2 block">Name</label>
-                  <Input 
-                    placeholder="Your name"
-                    className="bg-background/50 border-border/50 focus:border-primary/50 transition-smooth"
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-semibold text-foreground">Name</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="Your name"
+                            className="bg-background/50 border-border/50 focus:border-primary/50 transition-smooth"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-semibold text-foreground">Email</FormLabel>
+                        <FormControl>
+                          <Input 
+                            type="email"
+                            placeholder="your.email@example.com"
+                            className="bg-background/50 border-border/50 focus:border-primary/50 transition-smooth"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
                   />
                 </div>
-                <div>
-                  <label className="text-sm font-semibold text-foreground mb-2 block">Email</label>
-                  <Input 
-                    type="email"
-                    placeholder="your.email@example.com"
-                    className="bg-background/50 border-border/50 focus:border-primary/50 transition-smooth"
-                  />
-                </div>
-              </div>
 
-              <div>
-                <label className="text-sm font-semibold text-foreground mb-2 block">Subject</label>
-                <Input 
-                  placeholder="Project discussion, job opportunity, etc."
-                  className="bg-background/50 border-border/50 focus:border-primary/50 transition-smooth"
+                <FormField
+                  control={form.control}
+                  name="subject"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-semibold text-foreground">Subject</FormLabel>
+                      <FormControl>
+                        <Input 
+                          placeholder="Project discussion, job opportunity, etc."
+                          className="bg-background/50 border-border/50 focus:border-primary/50 transition-smooth"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
 
-              <div>
-                <label className="text-sm font-semibold text-foreground mb-2 block">Message</label>
-                <Textarea 
-                  placeholder="Tell me about your project, requirements, or just say hello..."
-                  rows={6}
-                  className="bg-background/50 border-border/50 focus:border-primary/50 transition-smooth resize-none"
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-semibold text-foreground">Message</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Tell me about your project, requirements, or just say hello..."
+                          rows={6}
+                          className="bg-background/50 border-border/50 focus:border-primary/50 transition-smooth resize-none"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
 
-              <Button variant="hero" size="lg" className="w-full hover-glow">
-                <Send size={18} />
-                Send Message
-              </Button>
-            </form>
+                <Button 
+                  type="submit" 
+                  variant="hero" 
+                  size="lg" 
+                  className="w-full hover-glow"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send size={18} />
+                      Send Message
+                    </>
+                  )}
+                </Button>
+              </form>
+            </Form>
 
             <div className="mt-6 pt-6 border-t border-border/50">
               <p className="text-xs text-muted-foreground text-center">

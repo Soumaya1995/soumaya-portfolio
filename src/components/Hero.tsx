@@ -37,15 +37,15 @@ const Hero = () => {
           {/* Left Column - Text Content */}
           <div className="space-y-8">
             {/* Status Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 animate-pulse-subtle">
+            {/* <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 animate-pulse-subtle">
               <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
               <span className="text-sm font-medium text-primary">Available for opportunities</span>
-            </div>
+            </div> */}
 
             {/* Main Heading with Typing Effect */}
             <div className="space-y-4 animate-text-reveal">
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-none">
-                <span className="block text-foreground">Hello, I'm a</span>
+                <span className="block text-foreground">Hello, I'm a Soumaya</span>
                 <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-gradient-shift">
                   {roles[currentRole]}
                 </span>
@@ -60,7 +60,7 @@ const Hero = () => {
               
               {/* Tech Stack Pills */}
               <div className="flex flex-wrap gap-3">
-                {["Java Spring Boot", "React", "Angular", "AI/ML"].map((tech, index) => (
+                {["Java", "Spring Boot","Python" ,"React", "Angular", "AI/ML"].map((tech, index) => (
                   <span 
                     key={tech}
                     className="px-4 py-2 rounded-full bg-card/50 border border-primary/20 text-sm font-medium text-primary backdrop-blur-sm hover:bg-primary/10 transition-all duration-300"
@@ -140,7 +140,7 @@ const Hero = () => {
                   </div>
                   <span className="font-semibold text-foreground">Projects</span>
                 </div>
-                <p className="text-2xl font-bold text-accent">15+</p>
+                <p className="text-2xl font-bold text-accent">10+</p>
                 <p className="text-sm text-muted-foreground">Successful deployments</p>
               </div>
 
