@@ -103,7 +103,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="font-semibold text-foreground">Email</p>
-                    <p className="text-muted-foreground">soumaya@ben-hassen.com</p>
+                    <p className="text-muted-foreground">contact@example.com</p>
                   </div>
                 </div>
 
@@ -113,7 +113,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="font-semibold text-foreground">Phone</p>
-                    <p className="text-muted-foreground">+49 15511 037662</p>
+                    <p className="text-muted-foreground">+1 (555) 123-4567</p>
                   </div>
                 </div>
 
@@ -123,7 +123,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="font-semibold text-foreground">Location</p>
-                    <p className="text-muted-foreground">Germany, Available for Remote Work</p>
+                    <p className="text-muted-foreground">Available for Remote Work</p>
                   </div>
                 </div>
               </div>
@@ -133,13 +133,13 @@ const Contact = () => {
                 <p className="text-sm font-semibold text-foreground mb-4">Connect on Social</p>
                 <div className="flex gap-4">
                   <a 
-                    href="https://github.com/soumaya-benhassen" 
+                    href="#" 
                     className="glow-primary rounded-full w-10 h-10 flex items-center justify-center bg-primary/10 hover:bg-primary/20 transition-smooth hover-glow"
                   >
                     <Github className="text-primary" size={18} />
                   </a>
                   <a 
-                    href="https://www.linkedin.com/in/soumaya-ben-hassen/" 
+                    href="#" 
                     className="glow-primary rounded-full w-10 h-10 flex items-center justify-center bg-primary/10 hover:bg-primary/20 transition-smooth hover-glow"
                   >
                     <Linkedin className="text-primary" size={18} />
