@@ -9,8 +9,8 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
-  // Set base for GitHub Pages so assets resolve correctly when served from a subpath
-  base: mode === 'development' ? '/' : '/soumaya-portfolio/',
+  // Base path for production - use '/' for root domain deployment
+  base: '/',
   plugins: [
     react(),
     mode === 'development' &&

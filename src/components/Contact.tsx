@@ -82,11 +82,11 @@ const Contact = () => {
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Let's Connect
+            Get In Touch
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Ready to discuss your next project or explore opportunities? 
-            I'd love to hear about your ideas and how we can work together.
+            Have a question , or just say hello? 
+            I'd love to hear from you. Feel free to reach out through any of the channels below.
           </p>
         </div>
 
@@ -94,7 +94,7 @@ const Contact = () => {
           {/* Contact Information */}
           <div className="space-y-8">
             <Card className="gradient-card border-border/50 p-6 hover-glow transition-smooth">
-              <h3 className="text-2xl font-bold mb-6 text-primary">Get In Touch</h3>
+              <h3 className="text-2xl font-bold mb-6 text-primary">Contact Information</h3>
               
               <div className="space-y-6">
                 <div className="flex items-center space-x-4">
@@ -103,7 +103,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="font-semibold text-foreground">Email</p>
-                    <p className="text-muted-foreground">contact@example.com</p>
+                    <p className="text-muted-foreground"><a href="mailto:soumaya@ben-hassen.com">soumaya@ben-hassen.com</a></p>
                   </div>
                 </div>
 
@@ -123,7 +123,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="font-semibold text-foreground">Location</p>
-                    <p className="text-muted-foreground">Available for Remote Work</p>
+                    <p className="text-muted-foreground">Stuttgart , Germany (Remote / Onsite)</p>
                   </div>
                 </div>
               </div>
@@ -133,13 +133,13 @@ const Contact = () => {
                 <p className="text-sm font-semibold text-foreground mb-4">Connect on Social</p>
                 <div className="flex gap-4">
                   <a 
-                    href="#" 
+                    href="https://github.com/soumaya-benhassen" 
                     className="glow-primary rounded-full w-10 h-10 flex items-center justify-center bg-primary/10 hover:bg-primary/20 transition-smooth hover-glow"
                   >
                     <Github className="text-primary" size={18} />
                   </a>
                   <a 
-                    href="#" 
+                    href="https://www.linkedin.com/in/soumaya-ben-hassen/" 
                     className="glow-primary rounded-full w-10 h-10 flex items-center justify-center bg-primary/10 hover:bg-primary/20 transition-smooth hover-glow"
                   >
                     <Linkedin className="text-primary" size={18} />
@@ -149,7 +149,7 @@ const Contact = () => {
             </Card>
 
             {/* Availability Status */}
-            <Card className="gradient-card border-border/50 p-6 hover-glow transition-smooth">
+            {/* <Card className="gradient-card border-border/50 p-6 hover-glow transition-smooth">
               <div className="flex items-center space-x-3 mb-4">
                 <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
                 <h4 className="font-semibold text-foreground">Available for New Opportunities</h4>
@@ -158,7 +158,7 @@ const Contact = () => {
                 Currently open to full-time positions, freelance projects, and exciting collaborations 
                 in software development, particularly those involving AI integration and modern web technologies.
               </p>
-            </Card>
+            </Card> */}
           </div>
 
           {/* Contact Form */}

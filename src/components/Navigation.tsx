@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Download } from "lucide-react";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,8 +54,16 @@ const Navigation = () => {
                 {item.label}
               </button>
             ))}
-            <Button variant="outline" size="sm" className="hover-glow-accent">
-              Download CV
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="hover-glow-accent"
+              asChild
+            >
+              <a href="/resume.pdf" download="Soumaya_Ben_Hassen_Resume.pdf" className="flex items-center">
+                <Download size={16} className="mr-2" />
+                Download CV
+              </a>
             </Button>
           </div>
 
@@ -83,8 +91,16 @@ const Navigation = () => {
                   {item.label}
                 </button>
               ))}
-              <Button variant="outline" size="sm" className="hover-glow-accent w-fit mt-4">
-                Download CV
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="hover-glow-accent w-fit mt-4"
+                asChild
+              >
+                <a href="/resume.pdf" download="Soumaya_Ben_Hassen_Resume.pdf">
+                  <Download size={16} className="mr-2" />
+                  Download CV
+                </a>
               </Button>
             </div>
           </div>

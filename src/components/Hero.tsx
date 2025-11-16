@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 
 const Hero = () => {
   const [currentRole, setCurrentRole] = useState(0);
-  const roles = ["Software Engineer", "Full-Stack Developer", "AI Enthusiast", "Problem Solver"];
+  const roles = ["Software Engineer"];
+  // const roles = ["Software Engineer", "Full-Stack Developer", "AI Enthusiast", "Problem Solver"];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -44,8 +45,8 @@ const Hero = () => {
 
             {/* Main Heading with Typing Effect */}
             <div className="space-y-4 animate-text-reveal">
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-none">
-                <span className="block text-foreground">Hello, I'm a Soumaya</span>
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-none">
+                <span className="block text-foreground"> Soumaya Ben Hassen </span>
                 <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-gradient-shift">
                   {roles[currentRole]}
                 </span>
@@ -60,7 +61,7 @@ const Hero = () => {
               
               {/* Tech Stack Pills */}
               <div className="flex flex-wrap gap-3">
-                {["Java", "Spring Boot","Python" ,"React", "Angular", "AI/ML"].map((tech, index) => (
+                {["Java", "Spring Boot","Python" ,"React", "Angular", "Microservices" ,"TypeScript" ,"AI/ML"].map((tech, index) => (
                   <span 
                     key={tech}
                     className="px-4 py-2 rounded-full bg-card/50 border border-primary/20 text-sm font-medium text-primary backdrop-blur-sm hover:bg-primary/10 transition-all duration-300"
@@ -83,30 +84,38 @@ const Hero = () => {
                 variant="default" 
                 size="lg" 
                 className="group bg-gradient-to-r from-primary to-accent hover:shadow-tech hover:scale-105 transition-all duration-300"
+                asChild
               >
-                <Code className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
-                View My Work
+                <a href="#projects" className="flex items-center">
+                  <Code className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
+                  View My Work
+                </a>
               </Button>
               <Button 
                 variant="outline" 
                 size="lg" 
                 className="group border-primary/30 hover:border-primary hover:bg-primary/5 hover:shadow-tech transition-all duration-300"
+                asChild
               >
-                <Mail className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                Get In Touch
+                <a href="#contact" className="flex items-center">
+                  <Mail className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+                  Get In Touch
+                </a>
               </Button>
             </div>
 
             {/* Enhanced Social Links */}
             <div className="flex gap-4 animate-text-reveal" style={{ animationDelay: "0.6s" }}>
               {[
-                { icon: Github, label: "GitHub" },
-                { icon: Linkedin, label: "LinkedIn" },
-                { icon: Mail, label: "Email" }
-              ].map(({ icon: Icon, label }) => (
+                { icon: Github, label: "GitHub", href: "https://github.com/soumaya-benhassen" },
+                { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/soumaya-ben-hassen/" },
+                { icon: Mail, label: "Email", href: "mailto:soumaya@ben-hassen.com" }
+              ].map(({ icon: Icon, label, href }) => (
                 <a 
                   key={label}
-                  href="#" 
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group flex items-center justify-center w-12 h-12 rounded-xl bg-card/30 border border-primary/20 text-muted-foreground hover:text-primary hover:border-primary/50 hover:bg-primary/10 backdrop-blur-sm transition-all duration-300 hover:scale-110"
                   aria-label={label}
                 >
@@ -140,7 +149,7 @@ const Hero = () => {
                   </div>
                   <span className="font-semibold text-foreground">Projects</span>
                 </div>
-                <p className="text-2xl font-bold text-accent">10+</p>
+                <p className="text-2xl font-bold text-accent">8+</p>
                 <p className="text-sm text-muted-foreground">Successful deployments</p>
               </div>
 
@@ -153,7 +162,7 @@ const Hero = () => {
                   <span className="font-semibold text-foreground">AI Focus</span>
                 </div>
                 <p className="text-2xl font-bold text-primary">Latest</p>
-                <p className="text-sm text-muted-foreground">Technology integration</p>
+                <p className="text-sm text-muted-foreground">Technology Integration</p>
               </div>
             </div>
           </div>

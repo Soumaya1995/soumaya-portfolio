@@ -1,48 +1,63 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Github, ExternalLink, Brain, Database, Globe } from "lucide-react";
+import { Github, ExternalLink, Brain, Database, Globe, Building2, FileText } from "lucide-react";
 
 const Projects = () => {
   const projects = [
     {
-      title: "AI-Powered Analytics Dashboard",
-      description: "Full-stack application integrating machine learning models for predictive analytics with real-time data visualization.",
-      icon: Brain,
-      technologies: ["Java Spring Boot", "React", "TensorFlow", "PostgreSQL", "Docker"],
+      title: "Backoffice for Monoprix Mobile App",
+      description: "Enterprise backoffice system for Monprix, Tunisia's biggest retailer with over 90 stores, managing 100,000+ users and 50,000+ products.",
+      icon: Database,
+      technologies: ["Spring Boot", "Angular", "JHipster", "PostgreSQL", "Docker"],
       highlights: [
-        "Real-time ML predictions",
-        "Interactive data visualization",
-        "Microservices architecture",
-        "95% prediction accuracy"
+        "Scalable enterprise architecture",
+        "Multi-store management system",
+        "High-performance product catalog",
+        "User management for 100K+ users"
       ],
-      status: "In Development"
+      status: "Production",
+      Url: "https://play.google.com/store/apps/details?id=com.apeiron.monoprix&hl=fr"
     },
     {
-      title: "Enterprise Task Management System",
-      description: "Scalable task management platform with advanced workflow automation and team collaboration features.",
-      icon: Database,
-      technologies: ["Spring Boot", "Angular", "MySQL", "Redis", "AWS"],
+      title: "Apeiron AI",
+      description: "Revolutionary AI platform that brings together the world's most powerful AI models through specialized smart personas. One seamless experience eliminating the need for multiple AI tools and subscriptions.",
+      icon: Brain,
+      technologies: ["TypeScript", "Google Cloud Functions", "Vertex AI", "Flutter"],
       highlights: [
-        "Multi-tenant architecture",
-        "Advanced role-based access",
-        "Automated workflow engine",
-        "Real-time notifications"
+        "The Chatty: GPT-4, Claude, LLaMA, and Grok in one interface",
+        "The Artist: Creative companion with DALL·E and Stable Diffusion",
+        "The Reader: Document expert for PDFs analysis and summarization",
+        "The Surfer: Research assistant with real-time web search"
+      ],
+      status: "Production",
+      Url: "https://ai.apeiron-tech.com"
+
+    },
+    {
+      title: "Averroes Software",
+      description: "All-in-one solution for engineering and construction project management. Enables users to collaborate, control, and deliver projects with agile methodology. Dramatically increases project communication effectiveness and real-time data accessibility.",
+      icon: Building2,
+      technologies: ["Spring Boot", "Angular", "PostgreSQL", "Docker", "GCP" , "Microservices" , "Jhispter"],
+      highlights: [
+        "Project planning and team management",
+        "Real-time collaboration and communication",
+        "Resource control and document delivery",
+        "Minimizes risk and costly delays"
       ],
       status: "Production"
     },
     {
-      title: "Smart Content Recommendation Engine",
-      description: "AI-driven content recommendation system with natural language processing and user behavior analysis.",
-      icon: Globe,
-      technologies: ["Java", "React", "Python", "OpenAI API", "MongoDB"],
+      title: "RAG System for Document Customization",
+      description: "Advanced Retrieval-Augmented Generation system that intelligently customizes documents by retrieving relevant context from knowledge bases and generating personalized content. Transforms static templates into dynamic, context-aware documents tailored to specific use cases and requirements.",
+      icon: FileText,
+      technologies: ["Python", "LangChain", "Vector Database", "OpenAI API", "FastAPI", "React"],
       highlights: [
-        "NLP content analysis",
-        "Personalized recommendations",
-        "A/B testing framework",
-        "70% engagement increase"
+        "Semantic search across document knowledge bases",
+        "Dynamic content generation with retrieved context",
+        "Real-time document personalization and adaptation"
       ],
-      status: "Completed"
+      status: "In Development"
     }
   ];
 
@@ -120,17 +135,35 @@ const Projects = () => {
                   <Github size={16} />
                   Code
                 </Button>
-                <Button variant="outline" size="sm" className="flex-1 hover-glow">
-                  <ExternalLink size={16} />
-                  Demo
-                </Button>
+                {project.Url ? (
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="flex-1 hover-glow"
+                    asChild
+                  >
+                    <a 
+                      href={project.Url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                    >
+                      <ExternalLink size={16} />
+                      Demo
+                    </a>
+                  </Button>
+                ) : (
+                  <Button variant="outline" size="sm" className="flex-1 hover-glow">
+                    <ExternalLink size={16} />
+                    Demo
+                  </Button>
+                )}
               </div>
             </Card>
           ))}
         </div>
 
         {/* Call to Action */}
-        <div className="text-center">
+        {/* <div className="text-center">
           <Card className="gradient-card border-border/50 p-8 max-w-3xl mx-auto hover-glow transition-smooth">
             <h3 className="text-2xl font-bold mb-4 text-primary">Interested in Collaboration?</h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -141,7 +174,7 @@ const Projects = () => {
               Let's Build Something Amazing
             </Button>
           </Card>
-        </div>
+        </div> */}
       </div>
     </section>
   );

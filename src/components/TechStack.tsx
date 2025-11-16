@@ -1,5 +1,4 @@
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 
 const TechStack = () => {
   const techCategories = [
@@ -79,9 +78,6 @@ const TechStack = () => {
                   <div key={techIndex} className="space-y-2">
                     <div className="flex justify-between items-center">
                       <span className="text-sm font-medium text-foreground">{tech.name}</span>
-                      <Badge variant="secondary" className="text-xs">
-                        {tech.level}%
-                      </Badge>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
                       <div 
